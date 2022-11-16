@@ -3,10 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract PriceConsumerV3 {
-    AggregatorV3Interface internal priceFeed;
-
-contract PriceConverter {
+contract TestChainlink {
     AggregatorV3Interface internal eth_usd_price_feed;
     AggregatorV3Interface internal link_usd_price_feed;
 
@@ -18,17 +15,20 @@ contract PriceConverter {
      * Address: 0xD627B1eF3AC23F1d3e576FA6206126F3c1Bd0942
      */
     constructor() {
-        eth_usd_price_feed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
-        link_usd_price_feed = AggregatorV3Interface(0xb4c4a493AB6356497713A78FFA6c60FB53517c63);
+        eth_usd_price_feed = AggregatorV3Interface(
+            0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e
+        );
+        link_usd_price_feed = AggregatorV3Interface(
+            0xb4c4a493AB6356497713A78FFA6c60FB53517c63
+        );
     }
-
 
     /**
      * Returns the latest price
      */
-   function getETHUSD() public view returns (int) {
+    function getETHUSD() public view returns (int) {
         (
-            uint80 roundID, 
+            uint80 roundID,
             int price,
             uint startedAt,
             uint timeStamp,
@@ -38,10 +38,9 @@ contract PriceConverter {
         return price;
     }
 
-
     function getLINKUSD() public view returns (int) {
         (
-            uint80 roundID, 
+            uint80 roundID,
             int price,
             uint startedAt,
             uint timeStamp,
