@@ -25,8 +25,11 @@ async function main() {
 
   console.log("Token address:", token.address);
  
-  let price = await token.getLatestPrice();
+  let price = await token.getETHUSD();
   console.log(`Eth price is: ${price}`);
+
+  let price = await token.getLINKUSD();
+  console.log(`Link price is: ${price}`);
 
 }
 
