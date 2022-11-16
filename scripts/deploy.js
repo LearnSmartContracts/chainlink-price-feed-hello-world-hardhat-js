@@ -1,15 +1,33 @@
-async function main() {
-  const HelloWorld = await ethers.getContractFactory("HelloWorld");
 
-  // Start deployment, returning a promise that resolves to a contract object
-  // Note try to print the prices of ETH and Link here with a new console.log
-  const hello_world = await HelloWorld.deploy("Hello World!");   
-  console.log("Contract deployed to address:", hello_world.address);
+const hre = require("hardhat");
+
+const API_KEY = process.env.API_KEY;
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+
+const contract = require("../artifacts/contracts/TestChainlink.sol/TestChainlink.json");
+
+// provider - Alchemy
+const alchemyProvider = new ethers.providers.AlchemyProvider(network="goerli", API_KEY);
+
+// signer - you
+const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
+
+
+async function main() {
+  const [deployer] = await ethers.getSigners();
+
+  console.log("Deploying contracts with the account:", deployer.address);
+
+  console.log("Account balance:", (await deployer.getBalance()).toString());
+
+  const Token = await ethers.getContractFactory("TestChainlink");
+  const token = await Token.deploy();
+
+  console.log("Token address:", token.address);
+ 
+  let price = await token.getLatestPrice();
+  console.log(`Eth price is: ${price}`);
+
 }
 
-main()
- .then(() => process.exit(0))
- .catch(error => {
-   console.error(error);
-   process.exit(1);
- });
+main();
