@@ -1,4 +1,4 @@
-# chainlink-price-feed-hello-world
+# chainlink-price-feed-hello-world-hardhat-js
 Basic Chainlink Price Feed ETH/USD and Link/USD
 Goerli Testnet
 Hardhat 
